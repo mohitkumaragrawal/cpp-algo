@@ -41,6 +41,35 @@ public:
   }
 };
 
+class Solution2 {
+public:
+  int lengthOfLongestSubstring(string& str) {
+    // it stores the index of characters in the window;
+    int mp[128]; // {'a': 0, 'b': 1}
+    for (int i = 0; i < 128; ++i) mp[i] = -1;
+
+    // str = abba
+
+    int result = 0; // result = 2
+    int left = 0, right = 0; // left = 2, right = 2
+    while (right < str.size()) {
+      int r_char = str[right]; // r_char = b
+
+      // if it exists in the window;
+      if (mp[r_char] != -1) {
+        // if mp[r_char] is already out of my window, then don't update left;
+        left = max(left, mp[r_char] + 1);
+      }
+
+      mp[r_char] = right;
+      result = max(result, (right - left + 1));
+      right++;
+    }
+
+    return result;
+  }
+};
+
 int main() {
   Solution sol;
   string test_str = "abcabca";
