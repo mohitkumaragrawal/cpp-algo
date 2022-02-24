@@ -8,10 +8,10 @@ float Q_rsqrt(float num) {
   x2 = num * 0.5f;
   y = num;
 
-  i = *(long*) &y;
-  i = 0x5f3759df - (i >> 1);
+  i = *(long*) &y;             // Evil bit hack
+  i = 0x5f3759df - (i >> 1);  // What the f?
   y = *(float*) &i;
-  y = y * (threehalfs - (x2*y*y));
+  y = y * (threehalfs - (x2*y*y)); // Newton's iteration
   y = y * (threehalfs - (x2*y*y));
   return y;
 }
