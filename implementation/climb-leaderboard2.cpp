@@ -32,21 +32,18 @@ int main() {
     int playerscore = player[i];
 
     // find a pointer such that ranked[pointer] is either equal to or greater than playerscore
-    // if not such pointer found, pointer is either 0 or -1;
+    // if not such pointer found, pointer is 0;
     while (ranked[pointer] < playerscore && pointer > 0 ) {
       pointer--;
     }
 
     int playerrank;
-    // now, here, playerscore is either equal to ranked[pointer] or less than ranked[pointer]
     if (ranked[pointer] == playerscore) {
       // same rank
       playerrank = rank[pointer];
     } else if (playerscore < ranked[pointer]) {
-      // player scored less than ranked[pointer]
       playerrank = rank[pointer] + 1;
     } else {
-      // if playerscored is more than the maximum of ranked[pointer] then playerrank is always 1.
       playerrank = 1;
     }
 
