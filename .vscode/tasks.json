@@ -1,0 +1,26 @@
+{
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "g++.exe build active file",
+      "command": "g++.exe",
+      "args": [
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}\\${fileBasenameNoExtension}.exe"
+      ]
+    },
+    {
+      "type": "shell",
+      "label": "g++ build & run active file",
+      "command": "C:\\MinGW64\\bin\\g++.exe",
+      "args": [
+        "${file}",
+        "-o",
+        "${fileDirname}\\${fileBasenameNoExtension}.exe"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

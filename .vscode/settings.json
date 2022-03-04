@@ -86,7 +86,14 @@
     "queue": "cpp",
     "random": "cpp"
   },
+
   "files.exclude": {
-    "**.exe": true
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "*.exe": true
   }
 }
