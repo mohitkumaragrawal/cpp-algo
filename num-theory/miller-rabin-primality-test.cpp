@@ -38,18 +38,4 @@ number bin_exp(number base, number power, number mod) {
   return result;
 }
 
-number miller_rabin_primality_test(number p) {
-  number prev = p - 1;
-  
-  // prev can be represented as (2 ** s). d where d is odd;
-  number s = 0, d;
-  while (prev % 2 == 0) {
-    prev /= 2;
-    s++;
-  }
-  d = prev;
-
-  for (int base: millerBase64) {
-    number t = bin_exp()
-  }
-}
+// TODO: complete this implementation;

@@ -11,7 +11,7 @@ using ull = uint64_t;
 
 // where n is less that 10^6
 array<ull, UPPER_LIMIT> sieve;
-array<ull, UPPER_LIMIT> factorials;
+array<ull, UPPER_LIMIT> factorial_array;
 
 map<ull, ull> prime_factorize(ull n) {
   map<ull, ull> result;
@@ -46,11 +46,11 @@ void init_sieve() {
 }
 
 void init_fact() {
-  factorials[0] = 1;
-  factorials[1] = 1;
+  factorial_array[0] = 1;
+  factorial_array[1] = 1;
 
   for (ull i = 2; i <= UPPER_LIMIT; ++i) {
-    factorials[i] = (i * factorials[i-1]) % mod;
+    factorial_array[i] = (i * factorial_array[i-1]) % mod;
   }
 }
 
@@ -71,7 +71,7 @@ ull binexp(ull base, ull pow) {
 
 ull factorial(ull n) {
   if (n <= 1000000) {
-    return factorials[n];
+    return factorial_array [n];
   }
 
   ull result = 1;
@@ -94,7 +94,7 @@ ull choose(ull n, ull r) {
 
 
 int main() {
-  freopen(R"(D:\MyFiles\my-repos\cpp-algo\num-theory\joseph-and-array.txt)", "r", stdin);
+  freopen("joseph-and-array.txt", "r", stdin);
   init_sieve();
   init_fact();
 
