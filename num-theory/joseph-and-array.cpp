@@ -70,12 +70,12 @@ ull binexp(ull base, ull pow) {
 }
 
 ull factorial(ull n) {
-  if (n <= 1000000) {
-    return factorial_array [n];
+  if (n < UPPER_LIMIT) {
+    return factorial_array[n];
   }
 
-  ull result = 1;
-  for (ull i = 2; i <= n; ++i) {
+  ull result = factorial_array[UPPER_LIMIT-1];
+  for (ull i = UPPER_LIMIT; i <= n; ++i) {
     result = (result * i) % mod;
   }
   return result;
