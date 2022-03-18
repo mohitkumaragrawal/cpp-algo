@@ -1,12 +1,12 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-using ull = uint64_t;
+using ll = int64_t;
 
-bool checkSubMatSum(vector<vector<ull>>& mat, ull sz, ull n, ull k,  ull& l, ull& r) {
+bool checkSubMatSum(vector<vector<ll>>& mat, ll sz, ll n, ll k,  ll& l, ll& r) {
   for (int i = 0; i <= (n-sz); ++i) {
     for (int j = 0; j <= (n-sz); ++j) {
-      ull sum = 0;
+      ll sum = 0;
       for (int i1 = 0; i1 < sz; ++i1) {
         for (int j1 = 0; j1 < sz; ++j1) {
           sum += mat[i + i1][j + j1];
@@ -22,13 +22,13 @@ bool checkSubMatSum(vector<vector<ull>>& mat, ull sz, ull n, ull k,  ull& l, ull
   return false;
 }
 
-ull findSize(vector<vector<ull>>& mat, ull n, ull k,  ull& l, ull& r) {
-  ull sz_min = 1;
-  ull sz_max = n;
+ll findSize(vector<vector<ll>>& mat, ll n, ll k,  ll& l, ll& r) {
+  ll sz_min = 1;
+  ll sz_max = n;
 
-  ull ans = -1;
+  ll ans = -1;
   while (sz_max >= sz_min) {
-    ull sz = (sz_max + sz_min) / 2;
+    ll sz = (sz_max + sz_min) / 2;
 
     if (checkSubMatSum(mat, sz, n, k, l, r)) {
       ans = sz;
@@ -41,19 +41,19 @@ ull findSize(vector<vector<ull>>& mat, ull n, ull k,  ull& l, ull& r) {
 }
 
 int main() {
-  ull n, k;
+  ll n, k;
   cin >> n >> k;
 
   // n x n matrix;
-  vector<vector<ull>> mat(n, vector<ull>(n));
+  vector<vector<ll>> mat(n, vector<ll>(n));
   for (int i = 0; i < n; ++i) {
     for (int j = 0; j < n; ++j) {
       cin >> mat[i][j];
     }
   }
 
-  ull l, r;
-  ull sz = findSize(mat, n, k, l, r);
+  ll l, r;
+  ll sz = findSize(mat, n, k, l, r);
 
   if (sz > 0) {
     cout << "YES" << endl;
