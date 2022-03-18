@@ -1,41 +1,81 @@
 #include <iostream>
-#include <vector>
-
 using namespace std;
-using number = int64_t;
 
-vector<int> millerBase32 = {2, 3, 5, 7};
-vector<int> millerBase64 = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
+using ull = uint64_t;
 
-number mul_mod(number a, number b, number mod) {
-  number result = 0;
-  a %= mod;
-  b %= mod;
+ull mulmod(ull a, ull b, ull mod) {
+  ull result = 0;
   while (b > 0) {
     if (b & 1) {
       b--;
       result = (result + a) % mod;
     } else {
       b /= 2;
-      a  = (a * 2) % mod;
+      a = (a * 2) % mod;
     }
   }
-
   return result;
 }
 
-number bin_exp(number base, number power, number mod) {
-  number result = 1;
-  while (power > 0) {
-    if (power & 1) {
-      power--;
-      result = mul_mod(result, base, mod);
+ull binexp(ull a, ull b, ull mod) {
+  ull result = 1;
+  while (b > 0) {
+    if (b & 1) {
+      b--;
+      result = mulmod(result, a, mod);
     } else {
-      power /= 2;
-      base = mul_mod(base, base, mod);
+      b /= 2;
+      a = mulmod(a, a, mod);
     }
   }
   return result;
 }
 
-// TODO: complete this implementation;
+bool checkEquation(ull p, ull a, ull s, ull d) {
+  ull x = binexp(a, d, p);
+  if (x == 1 || x == (p-1)) return true;
+
+  for (int r = 1; r < s; ++r) {
+    x = mulmod(x, x, p);
+    if (x == (p-1)) return true;
+  }
+  return false;
+}
+
+bool isPrime(ull p) {
+  if (p == 1) return false;
+
+  ull base[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
+  if (p < 40) {
+    for (int i = 0; i < 12; ++i) {
+      if (p == base[i]) return true;
+    }
+    return false;
+  }
+
+  ull d = p - 1;
+  ull s = 0;
+  while (d % 2 == 0) {
+    d /= 2;
+    ++s;
+  }
+
+  for (int i = 0; i < 12; ++i) {
+    if (!checkEquation(p, base[i], s, d)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+int main() {
+  int t; cin >> t;
+  while (t--) {
+    ull p; cin >> p;
+    if (isPrime(p)) {
+      cout << "YES" << endl;
+    } else {
+      cout << "NO" << endl;
+    }
+  }
+}
