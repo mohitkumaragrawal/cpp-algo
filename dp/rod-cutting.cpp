@@ -4,7 +4,7 @@ using namespace std;
 
 int calcProfit(int N, vector<int>& price) {
   vector<int> dp(N+1);
-  dp[1] = price[1];
+  for (int i = 1; i <= N; ++i) dp[i] = price[i];
 
   for (int i = 2; i <= N; ++i) {
     for (int j = 1; j <= i/2; ++j) {
