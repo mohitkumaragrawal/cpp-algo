@@ -84,7 +84,8 @@
     "xtree": "cpp",
     "xutility": "cpp",
     "queue": "cpp",
-    "random": "cpp"
+    "random": "cpp",
+    "valarray": "cpp"
   },
 
   "files.exclude": {

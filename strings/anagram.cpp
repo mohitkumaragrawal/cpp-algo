@@ -1,6 +1,7 @@
-#include <string>
+#include <algorithm>
 #include <iostream>
 #include <map>
+#include <string>
 using namespace std;
 
 int anagram(const string& str) {
@@ -18,12 +19,12 @@ int anagram(const string& str) {
     mp2[str[i]]++;
   }
 
-  for (auto& pair: mp1) {
+  for (auto& pair : mp1) {
     pair.second = max(0, pair.second - mp2[pair.first]);
   }
 
   int ans = 0;
-  for (auto pair: mp1) {
+  for (auto pair : mp1) {
     ans += pair.second;
   }
   return ans;

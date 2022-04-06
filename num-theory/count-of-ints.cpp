@@ -73,6 +73,6 @@ int main() {
 
     ull result = n - p - d + 1;
 
-    cout << result;
+    cout << result << endl;
   }
 }

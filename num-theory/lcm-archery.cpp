@@ -1,4 +1,4 @@
-//https://www.hackerearth.com/practice/math/number-theory/basic-number-theory-1/practice-problems/algorithm/archery-1/
+// https://www.hackerearth.com/practice/math/number-theory/basic-number-theory-1/practice-problems/algorithm/archery-1/
 
 #include <iostream>
 #include <vector>
@@ -22,11 +22,13 @@ ll lcm(vector<ll>& vi) {
 }
 
 int main() {
-  ll T; cin >> T;
+  ll T;
+  cin >> T;
   while (T--) {
-    ll N; cin >> N;
+    ll N;
+    cin >> N;
     vector<ll> v(N);
-    for (auto& i: v) cin >> i;
+    for (auto& i : v) cin >> i;
 
     cout << lcm(v) << endl;
   }
