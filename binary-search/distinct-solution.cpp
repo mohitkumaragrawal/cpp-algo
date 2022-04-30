@@ -4,44 +4,42 @@
 using namespace std;
 using ull = unsigned long long;
 
-int calculated_solutions(int t1, int t2, int time) {
-  return (time / t1) + (time / t2);
-}
-
-bool is_both_finished(int N, int t1, int t2, int time) {
-  int time1 = (time / t1) * t1;
-  int time2 = (time / t2) * t2;
-
-  if (calculated_solutions(t1, t2, time1) < N ||
-      calculated_solutions(t1, t2, time2) < N)
-    return false;
-  return true;
-}
+#define endl '\n'
 
 // find the time when both stopped;
 ull find_time(int N, int t1, int t2) {
-  ull hightime = 2;
-  ull lowtime = 1;
-
-  while (!is_both_finished(N, t1, t2, hightime)) {
-    lowtime = hightime;
-    hightime *= 2;
-  }
-  ull time = hightime;
+  ull low = 1, high = 1e+9, x = 1e+9, y;
 
   while (true) {
-    if (lowtime > hightime) break;
+    if (low > high) break;
 
-    ull mid = lowtime + (hightime - lowtime) / 2;
+    auto mid = low + (high - low) / 2;
+    auto bob = (mid * t1) / t2;
 
-    if (is_both_finished(N, t1, t2, mid)) {
-      hightime = mid - 1;
-      time = mid;
+    if (mid + bob >= N) {
+      x = mid;
+      high = mid - 1;
     } else {
-      lowtime = mid + 1;
+      low = mid + 1;
     }
   }
-  return time;
+  low = 1;
+  high = 1e+9;
+  y = high;
+  while (true) {
+    if (low > high) break;
+    auto mid = low + (high - low) / 2;
+    auto alice = (mid * t2) / t1;
+
+    if (mid + alice >= N) {
+      y = mid;
+      high = mid - 1;
+    } else {
+      low = mid + 1;
+    }
+  }
+
+  return max(x * t1, y * t2);
 }
 
 void solve(int N, int t1, int t2) {
