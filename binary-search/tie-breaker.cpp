@@ -1,6 +1,6 @@
+#include <iomanip>
 #include <iostream>
 #include <vector>
-#include <iomanip>
 using namespace std;
 
 const double Epsilon = 1e-9;
@@ -47,13 +47,13 @@ int main() {
   double maxR = (N * maxA) / K - minB;
 
   while (true) {
-    double r = (maxR+minR) / 2.0;
+    double r = (maxR + minR) / 2.0;
     double ratioSum = calculateRatioSum(A, B, r);
 
-    if (abs(ratioSum-K) < Epsilon) break;
+    if (abs(ratioSum - K) < Epsilon) break;
 
     // increasing r will decrease the sum, and decreasing will increase the sum;
-    if (ratioSum > K ) {
+    if (ratioSum > K) {
       minR = r;
     } else {
       maxR = r;
