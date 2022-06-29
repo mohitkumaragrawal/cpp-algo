@@ -24,7 +24,6 @@ int main() {
         break;
       }
     }
-
     if (has_a) {
       if (t.size() > 1) {
         cout << -1 << endl;

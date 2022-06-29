@@ -12,7 +12,8 @@ int main() {
     cin >> n >> q;
 
     vector<int> a(n);
-    for (int& i : a) cin >> i;
+    for (int &i : a)
+      cin >> i;
 
     sort(a.begin(), a.end(), greater<int>());
 
@@ -32,7 +33,8 @@ int main() {
       int high = n - 1;
 
       while (true) {
-        if (low > high) break;
+        if (low > high)
+          break;
 
         int mid = (low + high) / 2;
         if (sum[mid] >= x) {

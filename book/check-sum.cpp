@@ -84,7 +84,7 @@ bool check_sum(std::vector<int>& vec, int sum) {
 }
 
 int main() {
-  std::vector test = { 5, 2, 4, 7, 1, 3, 2, 6 };
+  std::vector<int> test = { 5, 2, 4, 7, 1, 3, 2, 6 };
 
   std::cout << test << std::endl;
   
