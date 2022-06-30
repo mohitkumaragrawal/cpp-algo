@@ -5,8 +5,8 @@ using namespace std;
 using ull = unsigned long long;
 
 // O(n^3)
-vector<vector<ull>> matmul(const vector<vector<ull>>& A,
-                           const vector<vector<ull>>& B) {
+vector<vector<ull>> matmul(const vector<vector<ull>> &A,
+                           const vector<vector<ull>> &B) {
   vector<vector<ull>> result(A.size(), vector<ull>(B[0].size(), 0));
   for (int i = 0; i < A.size(); ++i) {
     for (int j = 0; j < B[0].size(); ++j) {
@@ -21,8 +21,7 @@ vector<vector<ull>> matmul(const vector<vector<ull>>& A,
 int main() {
   int n, m, k;
   cin >> n >> m >> k;
-  vector<vector<ull>> v(n, vector<ull>(n, 0));
-
+  vector<vector<ull>> v(n, vector<ull>(n, 0)); 
   while (m--) {
     int n1, n2;
     cin >> n1 >> n2;
@@ -32,7 +31,8 @@ int main() {
   }
 
   vector<vector<ull>> result(n, vector<ull>(n, 0));
-  for (int i = 0; i < n; ++i) result[i][i] = 1;
+  for (int i = 0; i < n; ++i)
+    result[i][i] = 1;
 
   while (k > 0) {
     if (k % 2 == 0) {

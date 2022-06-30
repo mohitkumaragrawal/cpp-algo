@@ -16,33 +16,12 @@ void init_sieve() {
   }
 }
 
-long long binexp(int base, int pw) {
-  long long result = 1;
-
-  while (pw > 0) {
-    if (pw & 1) {
-      pw--;
-      result *= base;
-    } else {
-      base *= base;
-      pw /= 2;
-    }
-  }
-  return result;
-}
-
-long long divisorSum(int num) {
-  map<int, int> mp;
+long long getpath(int num) {
+  long long ans = 0;
 
   while (num > 1) {
-    mp[sieve[num]]++;
+    ans += sieve[num];
     num /= sieve[num];
-  }
-
-  long long ans = 1;
-  for (auto pr : mp) {
-    long long factor = (binexp(pr.first, pr.second + 1) - 1) / (pr.first - 1);
-    ans *= factor;
   }
   return ans;
 }
@@ -55,6 +34,7 @@ int gcd(int a, int b) {
 }
 
 int main() {
+  init_sieve();
   int T;
   cin >> T;
 
@@ -69,10 +49,11 @@ int main() {
       if (v < u)
         swap(u, v);
       if (v % u == 0) {
-        cout << v / u << endl;
+        cout << getpath(v / u) << endl;
       } else {
         int g = gcd(u, v);
-        cout << (u + v) / g << endl;
+        int ans = getpath(u / g) + getpath(v / g);
+        cout << ans << endl;
       }
     }
   }
