@@ -9,7 +9,7 @@ int main() {
     cin >> L >> R;
 
     int start = L;
-    while (start & 3 != 0) {
+    while (start & 1) {
       start++;
     }
 
