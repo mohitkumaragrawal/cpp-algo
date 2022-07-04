@@ -43,9 +43,11 @@ int main() {
     cin >> N;
     vector<int> arr(N);
     for (int &i : arr)
+
       cin >> i;
 
     cout << calculate_max_non_adjacent_sum(arr) << " "
+
          << calc_mx_nonadj_sum_space(arr) << endl;
   }
 }
