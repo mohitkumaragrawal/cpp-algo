@@ -2,13 +2,16 @@
 using namespace std;
 #define int long long
 
-signed main() {
+signed main()
+{
   int N, kn, p0;
   cin >> N >> kn >> p0;
 
   vector<int> p(N), k(kn);
-  for (int& i: p) cin >> i;
-  for (int& i: k) cin >> i;
+  for (int &i : p)
+    cin >> i;
+  for (int &i : k)
+    cin >> i;
 
   sort(p.begin(), p.end());
   sort(k.begin(), k.end());
@@ -17,24 +20,19 @@ signed main() {
   vector<vector<int>> dp(N + 1, vector<int>(kn + 1, inf));
   dp[0][0] = 0;
 
-  for (int j = 0; j < kn; ++j) {
-    for (int i = 0; i < N; ++i) {
+  for (int i = 0; i < N; ++i)
+  {
+    for (int j = 0; j < kn; ++j)
+    {
       // don't take jth key;
-      dp[i][j + 1] = min(dp[i+1][j], dp[i][j]);
+      dp[i][j + 1] = min(dp[i][j + 1], dp[i][j]);
 
       // take that key
-      dp[i+1][j+1] = min(dp[i+1][j], max(dp[i][j],  abs(p[i] - k[j]) + abs(k[j] - p0)  ));
+      int cost = abs(p[i] - k[j]) + abs(k[j] - p0);
+      dp[i + 1][j + 1] = min(dp[i + 1][j + 1], max(dp[i][j], cost));
     }
   }
-
-  for (int i = 0; i <= N; ++i) {
-    for (int j = 0; j <= kn; ++j) {
-      cout << dp[i][j] << " ";
-    }
-    cout << endl;
-  }
-
-  int ans = *min_element(dp[N - 1].begin(), dp[N -1].end());
+  int ans = *min_element(dp[N].begin(), dp[N].end());
   cout << ans << endl;
 
   // for (int j = 0; j < kn; ++j) {
@@ -57,7 +55,7 @@ signed main() {
   //       dp[i][j+1] = dp[i][j];
   //     } else {
   //       dp[i][j+1] = min(dp[i][j+1], dp[i][j]);
-  //     } 
+  //     }
   //   }
   // }
 
