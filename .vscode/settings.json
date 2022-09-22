@@ -1,5 +1,6 @@
 {
   "files.associations": {
+    ".env": "plaintext",
     "iostream": "cpp",
     "sstream": "cpp",
     "utility": "cpp",
@@ -86,7 +87,16 @@
     "queue": "cpp",
     "random": "cpp",
     "valarray": "cpp",
-    "cassert": "cpp"
+    "cassert": "cpp",
+    "barrier": "cpp",
+    "filesystem": "cpp",
+    "memory_resource": "cpp",
+    "ranges": "cpp",
+    "regex": "cpp",
+    "scoped_allocator": "cpp",
+    "span": "cpp",
+    "stack": "cpp",
+    "syncstream": "cpp"
   },
 
   "files.exclude": {

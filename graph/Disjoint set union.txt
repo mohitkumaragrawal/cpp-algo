@@ -1,0 +1,21 @@
+Disjoint set union
+==================
+
+operations:
+  1> make_set(v): create a new set consisting of a the new element v;
+
+  2> union_sets(a, b): merges the two specified sets (the set in which element a is located, and the set in which the element b is located)
+
+  3> find_set(v): returns the representative (also called the leader) of the set that contains the element v. THE REPRESENTATIVE OF THE SET CAN CHANGE OVER TIME NAMELY AFTER `union_sets` CALL.
+
+each operation takes O(1) time on average;
+
+There is an alternate version of the DSU, which does each operation in lg N time but is more powerful than regular DSU.
+
+
+applications
+==============
+1> Connected components in a graph
+---------------------------------
+  this application is very important coz nearly the same problem appear in Kruskal's algorithm for finding a minimum spanning tree. Using DSU we can improve the O( m lg n + n^2) complexity to O(m lg n);
+
