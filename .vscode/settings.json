@@ -96,7 +96,10 @@
     "scoped_allocator": "cpp",
     "span": "cpp",
     "stack": "cpp",
-    "syncstream": "cpp"
+    "syncstream": "cpp",
+    "any": "cpp",
+    "coroutine": "cpp",
+    "unordered_set": "cpp"
   },
 
   "files.exclude": {
