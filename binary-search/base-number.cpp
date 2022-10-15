@@ -40,6 +40,7 @@ void solve(int a, int b, int n) {
   }
   cout << "FIRST : " << first_occurence << endl;
 
+
   if (first_occurence == -1) {
     cout << 0 << endl;
     return;
