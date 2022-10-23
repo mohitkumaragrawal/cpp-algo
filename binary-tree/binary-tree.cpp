@@ -4,17 +4,18 @@
 struct node {
   int data;
 
-  node* left;
-  node* right;
+  node *left;
+  node *right;
 
-  node (int val) : data(val) {
+  node(int val) : data(val) {
     left = nullptr;
     right = nullptr;
   }
 };
 
-void preorder_display(node* root) {
-  if (!root) return;
+void preorder_display(node *root) {
+  if (!root)
+    return;
 
   using std::cout;
 
@@ -23,8 +24,9 @@ void preorder_display(node* root) {
   preorder_display(root->right);
 }
 
-void inorder_display(node* root) {
-  if (!root) return;
+void inorder_display(node *root) {
+  if (!root)
+    return;
   using std::cout;
 
   inorder_display(root->left);
@@ -32,8 +34,9 @@ void inorder_display(node* root) {
   inorder_display(root->right);
 }
 
-void postorder_display(node* root) {
-  if (!root) return;
+void postorder_display(node *root) {
+  if (!root)
+    return;
 
   postorder_display(root->left);
   postorder_display(root->right);
@@ -41,7 +44,7 @@ void postorder_display(node* root) {
 }
 
 int main() {
-  node* root = new node(1);
+  node *root = new node(1);
 
   root->left = new node(2);
   root->right = new node(3);
@@ -65,6 +68,5 @@ int main() {
 
   std::cout << "Postorder: " << std::endl;
   postorder_display(root);
-  std::cout <<  std::endl;
-
+  std::cout << std::endl;
 }
