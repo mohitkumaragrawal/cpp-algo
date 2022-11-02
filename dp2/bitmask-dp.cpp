@@ -1,5 +1,6 @@
-
 #include <bits/stdc++.h>
+
+#include <functional>
 using namespace std;
 
 #define all(x) begin(x), end(x)
@@ -17,7 +18,7 @@ const ll MOD = 1e9 + 7;
 #define DEBUG(x) __dis << __m(x) << endl
 #define DEBUG2(x, y) __dis << __m(x) << __m(y) << endl
 #define DEBUG3(x, y, z) __dis << __m(x) << __m(y) << __m(z) << endl
-#define DEBUG4(x, y, z, w)                                                     \
+#define DEBUG4(x, y, z, w) \
   __dis << __m(x) << __m(y) << __m(z) << __m(w) << endl;
 #else
 #define endl '\n'
@@ -28,51 +29,44 @@ const ll MOD = 1e9 + 7;
 #define DEBUG4(x, y, z, w)
 #endif
 
-ll a[5005], b[5005], rev_sum[5005][5005], pre[5005];
-
 void solve() {
-  ll n;
-  cin >> n;
+  ll N;
+  cin >> N;
 
-  for (ll i = 0; i < n; ++i)
-    cin >> a[i];
+  const ll MAX_MASK = (1 << 20);
+  const ll INF = 1e+17;
 
-  for (ll i = 0; i < n; ++i)
-    cin >> b[i];
+  vector<vector<ll>> dp(21, vector<ll>(MAX_MASK, -1));
 
-  pre[0] = a[0] * b[0];
-  for (ll i = 1; i < n; ++i) { 
-    pre[i] = a[i] * b[i] + pre[i - 1];
-    DEBUG(pre[i]);
+  // O(N^2)
+  vector<vector<ll>> C(N, vector<ll>(N));
+  for (ll i = 0; i < N; ++i) {
+    for (ll j = 0; j < N; ++j) cin >> C[i][j];
   }
-  pre[n] = 0;
 
-  for (ll i = 0; i < n; ++i) {
-    rev_sum[i][0] = 0;
-    rev_sum[i][1] = a[i] * b[i];
-
-    cout << rev_sum[i][0] << " " << rev_sum[i][1] << " ";
-
-    for (ll j = 2; i + j - 1 < n; ++j) {
-      ll k = i + j - 1;
-      rev_sum[i][j] =
-          a[i] * b[k] + a[k] * b[i] + rev_sum[i + 1][j - 2];
-
-      cout << rev_sum[i][j] << " "; 
+  // O(N * 2 ^ N)
+  function<ll(ll, ll)> rec = [&](ll i, ll mask) -> ll {
+    if (i == -1) {
+      if (mask == 0)
+        return 0;
+      else
+        return INF;
     }
-    cout << endl;
-  }
 
-  ll ans = 0;
-  for (ll i = 0; i < n; ++i) {
-    for (ll j = i; j < n; ++j) {
-      ll new_ans = rev_sum[i][j-i+1] + pre[j+1];
-      if (i > 0) new_ans += pre[i-1];
+    if (dp[i][mask] != -1) return dp[i][mask];
 
-      DEBUG(new_ans);
-      ans = max(ans, new_ans);
+    dp[i][mask] = INF;
+
+    for (int j = 0; j < N; ++j) {
+      if (!(mask && (1 << j))) continue;
+      ll res = C[i][j] + rec(i - 1, mask ^ (1 << j));
+
+      dp[i][mask] = min(dp[i][mask], res);
     }
-  }
+    return dp[i][mask];
+  };
+
+  ll ans = rec(N - 1, (1 << N) - 1);
   cout << ans << endl;
 }
 
@@ -83,7 +77,10 @@ int main() {
   auto start = chrono::high_resolution_clock::now();
 #endif
 
-  solve();
+  ll T = 1;
+  while (T--) {
+    solve();
+  }
 
 #ifdef _DEBUG
   auto stop = chrono::high_resolution_clock::now();

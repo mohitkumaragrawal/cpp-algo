@@ -5,7 +5,7 @@
 using namespace std;
 using ll = long long;
 using ull = unsigned long long;
-const ll MOD = 1e9 + 7;
+// const ll MOD = 1e9 + 7;
 const ll INF = 1e+17;
 
 // In debug mode show some additional information;
@@ -16,7 +16,7 @@ const ll INF = 1e+17;
 #define DEBUG(x) display << _MC_(x) << endl
 #define DEBUG2(x, y) display << _MC_(x) << _MC_(y) << endl
 #define DEBUG3(x, y, z) display << _MC_(x) << _MC_(y) << _MC_(z) << endl
-#define DEBUG4(x, y, z, w)                                                     \
+#define DEBUG4(x, y, z, w) \
   display << _MC_(x) << _MC_(y) << _MC_(z) << _MC_(w) << endl;
 #else
 #define display cout
@@ -37,29 +37,29 @@ void solve() {
   string str;
   cin >> str;
 
-  f[N-1] = (str[N-1] == '*') ? 1 : 0;
-  for (ll i = N-2; i >= 0; --i) {
-    f[i] = f[i+1];
+  f[N - 1] = (str[N - 1] == '*') ? 1 : 0;
+  for (ll i = N - 2; i >= 0; --i) {
+    f[i] = f[i + 1];
     if (str[i] == '*') {
       f[i]++;
     }
   }
 
-  F[N-1] = 0;
-  for (ll i = N-2; i >= 0; --i) {
+  F[N - 1] = 0;
+  for (ll i = N - 2; i >= 0; --i) {
     if (str[i] == '*') {
-      F[i] = F[i+1];
+      F[i] = F[i + 1];
     } else {
-      F[i] = F[i+1] + f[i];
+      F[i] = F[i + 1] + f[i];
     }
   }
 
   G[0] = 0;
   for (ll i = 1; i < N; ++i) {
     if (str[i] == '*') {
-      G[i] = G[i-1];
+      G[i] = G[i - 1];
     } else {
-      G[i] = G[i-1] + f[0] - f[i];
+      G[i] = G[i - 1] + f[0] - f[i];
     }
   }
 
@@ -81,6 +81,5 @@ int main() {
   ll T;
   cin >> T;
 
-  while (T--)
-    solve();
+  while (T--) solve();
 }

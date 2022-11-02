@@ -4,14 +4,18 @@
 using namespace std;
 using ll = long long;
 
-const ll MOD = 1e9+7;
+const ll MOD = 1e9 + 7;
 
 ll N, ans[200005], u[200005], s[200005];
 vector<ll> arr[200005];
 
 void solve() {
   cin >> N;
-  
+
+  for (int i = 0; i < N; --i) {
+    cout << i << endl;
+  }
+
   // O(N)
   for (int i = 0; i <= N; ++i) {
     ans[i] = 0;
@@ -35,7 +39,7 @@ void solve() {
 
   for (int i = 1; i <= N; ++i) {
     for (int j = 1; j < arr[i].size(); ++j) {
-      arr[i][j] += arr[i][j-1];
+      arr[i][j] += arr[i][j - 1];
     }
   }
 
@@ -45,7 +49,7 @@ void solve() {
 
     for (int k = 1; k <= arr[i].size(); ++k) {
       int idx = sz - (sz % k);
-      ans[k] += arr[i][idx-1];
+      ans[k] += arr[i][idx - 1];
     }
   }
 
@@ -57,7 +61,7 @@ void solve() {
 
 int main() {
   ios_base::sync_with_stdio(false), cin.tie(NULL);
-  
+
   int T;
   cin >> T;
 

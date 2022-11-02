@@ -13,8 +13,7 @@ void solve() {
   ll N;
   cin >> N;
 
-  for (ll i = 0; i < N; ++i)
-    cin >> arr[i];
+  for (ll i = 0; i < N; ++i) cin >> arr[i];
 
   for (ll i = 0; i <= N; ++i) {
     for (ll j = 0; j <= N; ++j) {
@@ -36,8 +35,7 @@ void solve() {
 
   ll ans = 0;
   for (ll j = 1; j <= N; ++j) {
-    if (dp[N][j] >= 0)
-      ans = j;
+    if (dp[N][j] >= 0) ans = j;
   }
   cout << ans << endl;
 }
