@@ -40,7 +40,6 @@ void solve(int a, int b, int n) {
   }
   cout << "FIRST : " << first_occurence << endl;
 
-
   if (first_occurence == -1) {
     cout << 0 << endl;
     return;
@@ -52,7 +51,7 @@ void solve(int a, int b, int n) {
   low = 1;
   while (true) {
     if (low > high) break;
-    int mid = low + (mid - low) / 2;
+    int mid = low + (high - low) / 2;
 
     int nd = num_digits(a, b, mid);
     if (nd < n) {
