@@ -6,13 +6,13 @@ using ull = unsigned long long;
 
 ll N, M;
 ll a[100005], b[100005], c[100005], ans[100005];
-map<ll, vector<ll>> mp;
 
 void solve() {
   cin >> N >> M;
   for (ll i = 0; i < N; ++i) cin >> a[i];
   for (ll i = 0; i < N; ++i) cin >> b[i];
   for (ll i = 0; i < M; ++i) cin >> c[i];
+  map<ll, vector<ll>> mp;
 
   bool last_one = false;
   for (ll i = 0; i < N; ++i) {
