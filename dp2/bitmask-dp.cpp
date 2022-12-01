@@ -58,7 +58,7 @@ void solve() {
     dp[i][mask] = INF;
 
     for (int j = 0; j < N; ++j) {
-      if (!(mask && (1 << j))) continue;
+      if (!(mask & (1 << j))) continue;
       ll res = C[i][j] + rec(i - 1, mask ^ (1 << j));
 
       dp[i][mask] = min(dp[i][mask], res);
