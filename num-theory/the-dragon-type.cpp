@@ -19,9 +19,7 @@ ull binexp(ull base, ull pow, ull p) {
   return result;
 }
 
-ull inv_modulo(ull n, ull p) {
-  return binexp(n, p-2, p);
-}
+ull inv_modulo(ull n, ull p) { return binexp(n, p - 2, p); }
 
 int main() {
   ull n, p;
@@ -29,17 +27,18 @@ int main() {
 
   vector<ull> heights(p, 0);
   for (int i = 0; i < n; ++i) {
-    ull hi; cin >> hi;
+    ull hi;
+    cin >> hi;
     heights[hi % p]++;
   }
-
-  for (int i = 0; i < p; ++i) {
-    cout << heights[i] << " ";
-  } cout << endl;
-
+  //
+  // for (int i = 0; i < p; ++i) {
+  //   cout << heights[i] << " ";
+  // } cout << endl;
+  //
   ull result = heights[0];
 
-  for (int i = 2; i <= p-2; ++i) {
+  for (int i = 2; i <= p - 2; ++i) {
     if (heights[i] == 0) continue;
 
     auto inv = inv_modulo(i, p);
