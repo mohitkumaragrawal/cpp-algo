@@ -7,7 +7,7 @@ vector<vector<ll>> adj;
 
 ll blift[200005][18], depth[200005];
 
-void binary_lifting(ll node, ll par, ll dpt) {
+void binary_lifting_dfs(ll node, ll par, ll dpt) {
   depth[node] = dpt;
   for (ll child : adj[node]) {
     if (child == par) continue;
@@ -15,7 +15,7 @@ void binary_lifting(ll node, ll par, ll dpt) {
     for (ll i = 1; i < 18; ++i) {
       blift[child][i] = blift[blift[child][i - 1]][i - 1];
     }
-    binary_lifting(child, node, dpt + 1);
+    binary_lifting_dfs(child, node, dpt + 1);
   }
 }
 
@@ -105,7 +105,7 @@ int main() {
   for (ll i = 0; i < 18; ++i) {
     blift[0][i] = 0;
   }
-  binary_lifting(0, -1, 0);
+  binary_lifting_dfs(0, -1, 0);
 
   while (q--) {
     process_query();

@@ -1,6 +1,8 @@
 #include <iostream>
 
-void towerOfHanoi(int n, char src, char dest, char helper) {
+using ll = long long;
+
+void towerOfHanoi(ll n, char src, char dest, char helper) {
   if (n == 0) return;
 
   // First we will transfer all objects except the last one to the helper
@@ -16,7 +18,7 @@ void towerOfHanoi(int n, char src, char dest, char helper) {
 int main() {
   freopen("towerofhanoi.txt", "r", stdin);
 
-  int n;
+  ll n;
   std::cin >> n;
 
   towerOfHanoi(n, 'A', 'C', 'B');
