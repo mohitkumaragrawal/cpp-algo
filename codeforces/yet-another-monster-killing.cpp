@@ -1,6 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define all(x) begin(x), end(x)
+#define OUT(T) cout << "Case #" << T << ": "
+using ll = long long;
+using ull = unsigned long long;
+
+#ifdef _DEBUG
+void dbg_out() { cerr << endl; }
+template <typename Head, typename... Tail>
+void dbg_out(Head H, Tail... T) {
+  cerr << ' ' << H;
+  dbg_out(T...);
+}
+#define dbg(...) cerr << "(" << #__VA_ARGS__ << "):", dbg_out(__VA_ARGS__)
+#else
+#define dbg(...)
+#endif
+
 struct max_t {
   long long val;
   static const long long null_v = -9223372036854775807LL;
@@ -80,3 +97,89 @@ struct segtree {
     lazy[i] = num_t();
   }
 };
+
+ll n, m, a[200005], p[200005], e[200005];
+
+segtree<max_t> st_monster, st_endurance;
+
+// check if it is possible to kill from i to (i + k - 1) monsters in one day;
+bool check(ll i, ll k) {
+  ll j = i + k - 1;
+
+  ll max_monster = st_monster.query(i, j).val;
+  ll x = lower_bound(p, p + m, max_monster) - p;
+  ll max_endurance = st_endurance.query(x, m - 1).val;
+
+  return max_endurance >= k;
+}
+
+// find the max. no. of monsters that can be killed
+ll max_monsters_to_kill(ll i) {
+  ll low = 1, high = n - i;
+  ll ans = 0;
+
+  while (low <= high) {
+    ll mid = (high + low) / 2;
+
+    if (check(i, mid)) {
+      ans = mid;
+      low = mid + 1;
+    } else {
+      high = mid - 1;
+    }
+  }
+
+  return ans;
+}
+
+void solve() {
+  cin >> n;
+  for (ll i = 0; i < n; ++i) cin >> a[i];  // O(n)
+
+  st_monster.init(n, a);  // O(n)
+  cin >> m;
+
+  {
+    vector<pair<ll, ll>> heros(m);
+    for (ll i = 0; i < m; ++i) {  // O(m)
+      cin >> heros[i].first >> heros[i].second;
+    }
+
+    sort(all(heros));  // O (m lg m)
+    for (ll i = 0; i < m; ++i) {
+      p[i] = heros[i].first;
+      e[i] = heros[i].second;
+    }
+
+    st_endurance.init(m, e);  // O (m)
+  }
+
+  ll strongest_monster = st_monster.query(0, n - 1).val;
+  ll strongest_hero = p[m - 1];
+
+  if (strongest_monster > strongest_hero) {
+    cout << "-1\n";
+    return;
+  }
+
+  ll cnt_killed = 0;
+  ll ans = 0;
+
+  while (cnt_killed < n) {
+    ll kill = max_monsters_to_kill(cnt_killed);
+    cnt_killed += kill;
+
+    assert(kill != 0);
+
+    ans++;
+  }
+  cout << ans << '\n';
+}
+
+int main() {
+  ios_base::sync_with_stdio(false), cin.tie(NULL);
+
+  ll T;
+  cin >> T;
+  while (T--) solve();
+}

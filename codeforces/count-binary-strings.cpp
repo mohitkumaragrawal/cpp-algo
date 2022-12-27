@@ -1,38 +1,73 @@
 #include <bits/stdc++.h>
-#define ll long long
 using namespace std;
-const ll mod = 998244353;
 
-int g[110][110];
-ll dp[110][110];
+#define all(x) begin(x), end(x)
+#define OUT(T) cout << "Case #" << T << ": "
+using ll = long long;
+using ull = unsigned long long;
+
+const ll MOD = 998244353;
+
+ll dp[105][105], R[105][105];
 
 void solve() {
-  int n;
-  scanf("%d", &n);
+  ll n;
+  cin >> n;
 
-  for (int i = 1; i <= n; i++)
-    for (int j = i; j <= n; j++) scanf("%d", &g[i][j]);
+  bool invalid = false;
+  for (ll i = 1; i <= n; ++i) {
+    for (ll j = i; j <= n; ++j) {
+      cin >> R[i][j];
 
-  dp[1][1] = 2;
-
-  for (int i = 1; i <= n; i++)
-    for (int j = 1; j <= i; j++) {
-      bool flag = 1;
-      for (int k = 1; k <= i; k++) {
-        if (g[k][i] == 1 && k < j) flag = 0;
-        if (g[k][i] == 2 && k >= j) flag = 0;
+      if (j == i && R[i][j] == 2) {
+        invalid = true;
       }
-      dp[i][j] *= flag;
-      dp[i + 1][j] = (dp[i + 1][j] + dp[i][j]) % mod;
-      dp[i + 1][i + 1] = (dp[i + 1][i + 1] + dp[i][j]) % mod;
     }
+  }
+  if (invalid) {
+    cout << 0 << endl;
+    return;
+  }
+
+  dp[1][0] = 2;
+  for (ll i = 2; i <= n; ++i) {
+    for (ll j = 0; j < i; ++j) {
+      bool valid = true;
+      for (ll k = 1; k < i; ++k) {
+        if (R[k][i] == 2) {
+          if (j < k) {
+            valid = false;
+            break;
+          }
+        } else if (R[k][i] == 1) {
+          if (j >= k) {
+            valid = false;
+            break;
+          }
+        }
+      }
+
+      if (valid) {
+        if (j != i - 1) {
+          dp[i][j] = dp[i - 1][j];
+        } else {
+          for (ll k = 0; k < j; ++k) {
+            dp[i][j] = (dp[i][j] + dp[i - 1][k]) % MOD;
+          }
+        }
+      } else {
+        dp[i][j] = 0;
+      }
+    }
+  }
 
   ll ans = 0;
-  for (int i = 1; i <= n; i++) ans = (ans + dp[n][i]) % mod;
-  printf("%lld\n", ans);
+  for (ll j = 0; j < n; ++j) ans = (ans + dp[n][j]) % MOD;
+  cout << ans << endl;
 }
-signed main() {
-  int T = 1;  // scanf("%d",&T);
-  while (T--) solve();
-  return 0;
+
+int main() {
+  ios_base::sync_with_stdio(false), cin.tie(NULL);
+
+  solve();
 }
