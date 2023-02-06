@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define int long
+#define int long long
 
 int num_digits(int a, int b, int x) {
   double logba = log((double)a) / log((double)b);
